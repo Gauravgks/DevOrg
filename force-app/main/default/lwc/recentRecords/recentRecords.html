@@ -1,0 +1,29 @@
+<!-- <template>
+    <lightning-card title={cardLabel}> 
+        <lightning-layout vertical-align="center">
+            <lightning-layout-item padding="around:small">
+                <template for:each={objList} for:item="objs">
+                    <p key = {objs.Id}></p>
+                    {objs.Id}+ {objs.Name} + {objs.LastViewedDate}
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template> -->
+
+<template>
+    <lightning-card title={cardLabel}>
+        <div class="slds-grid slds-wrap">
+            <template for:each={objList} for:item="objs">
+                <div key = {objs.Id} class="slds-col slds-size_4-of-12 slds-var-m-vertical_small">
+                    <lightning-card title={objs.Name}>
+                        <p class="slds-var-p-horizontal_small">
+                            {objs.Id}
+                            {objs.LastViewedDate}
+                        </p>
+                    </lightning-card>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
