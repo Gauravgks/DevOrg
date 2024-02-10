@@ -1,5 +1,6 @@
 public with sharing class Case_Trigger_Handler extends TriggerHandler {
-    public Case_Trigger_Handler() {
-
+   
+    public static void beforeInsert(List<Case> caseList){
+        Case_Utility.updateCaseSubject(caseList);
     }
 }
