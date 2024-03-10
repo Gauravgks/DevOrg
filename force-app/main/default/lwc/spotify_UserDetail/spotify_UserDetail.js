@@ -3,7 +3,6 @@ import getUserDetail from '@salesforce/apex/Spotify_HttpCallouts.getUserDetail'
 
 export default class Spotify_login extends LightningElement {
 
-
     spotifyUser;
     imageUrl;
     connectedCallback(){
