@@ -1,0 +1,12 @@
+<template>
+    <template lwc:if={isDisplayMsg}>
+    <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+        <span class="slds-assistive-text">warning</span>
+        <lightning-icon icon-name="utility:warning" title="warning"></lightning-icon>
+        <h2>Your Data is Outdated. Please refresh the Data</h2>
+        <div class="slds-notify__close">
+           <lightning-button-icon icon-name="utility:refresh" variant="bare" title="refresh" onclick={refreshPage}></lightning-button-icon>
+        </div>
+    </div>
+</template>
+</template>

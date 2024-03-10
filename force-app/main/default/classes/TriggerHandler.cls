@@ -238,4 +238,3 @@ public virtual class TriggerHandler {
     public class TriggerHandlerException extends Exception {}
   
   }
-  

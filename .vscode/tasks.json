@@ -1,27 +1,12 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "echo",
-            "type": "shell",
-            "command": "echo Hello"
-        },
-        {
-            "label": "Run Retrieve Manifest From Org on startup",
-            "type": "shell",
-            "command": "sfdx force:source:retrieve -x manifest/package.xml",
-            "windows": {
-              "command": "sfdx force:source:retrieve -x manifest/package.xml"
-            },
-            "presentation": {
-              "reveal": "always",
-              "panel": "new"
-            },
-            "runOptions": {
-              "runOn": "folderOpen"
-            }
-          }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "echo",
+      "type": "shell",
+      "command": "echo Hello"
+    }
+  ]
 }
