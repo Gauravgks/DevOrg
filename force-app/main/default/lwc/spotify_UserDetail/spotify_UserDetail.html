@@ -6,6 +6,22 @@
             <br/>
             <p>{spotifyUser}</p>
             <br/>
+            <p>{country}</p>
+            <br/>
+            <p>{Subscription}</p>
+            <br/>
+            <p>{Email}</p>
         </div>
+    </lightning-card>
+    <lightning-card title="Avaliable Devices">
+        <div class="slds-var-m-around_medium">
+            <!--Code to iterate over Device list available-->  
+            <!--<template for:each={devices} for:item="device">
+                  <p key={device.id}>{device.name}</p>
+              </template>-->
+              <p>Device Name: {DevicesName}</p>
+              <br/>
+              <p>Device Type: {DevicesType}</p>
+            </div>
     </lightning-card>
 </template>

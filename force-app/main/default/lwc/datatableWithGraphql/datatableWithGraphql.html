@@ -1,0 +1,11 @@
+<!-- sldsValidatorIgnore -->
+<!-- datatableWithGraphql.html -->
+<template>
+    <template lwc:if={contacts}>
+      <lightning-datatable key-field="Id" data={contacts} columns={columns} >
+      </lightning-datatable>
+    </template>
+    <template lwc:elseif={errors}>
+      <!-- Display errors -->
+    </template>
+  </template>

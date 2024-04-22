@@ -6,8 +6,9 @@ global class SpotifyRegistrationHandler implements Auth.RegistrationHandler{//NO
         return userDet;
     }
     global void updateUser(Id userId, Id portalId, Auth.UserData data){
+    system.debug('Data Value ' + data);
         User userDet = [SELECT Id,Name,Email,Username,Spotify_Login__c FROM User WHERE Email = :data.email LIMIT 1];//NOPMD
-        	userDet.Spotify_Login__c = TRUE;
+            userDet.Spotify_Login__c = TRUE;
         update userDet;
     }
 }
