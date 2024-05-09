@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="For Each Array">
+        <template for:each={Alphabets} for:item="alpha">
+            <p key={alpha}>{alpha}</p>
+        </template>
+
+        <template for:each={contactList} for:item="con">
+            <p key={con.id}>{con.id} {con.firstname} {con.lastname} </p>
+        </template>
+    </lightning-card>
+
+    <lightning-card title="Iterator Example">
+        <template iterator:con={contactList}>
+            <div key={con.value.id}>
+                <div lwc:if={con.first}>
+                    <p>{con.value.firstname} {con.value.lastname}</p>
+                </div>
+                <div lwc:if={con.last}>
+                    <p>{con.value.firstname} {con.value.lastname}</p>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,7 @@
+<template>
+    <lightning-card title="Wire As Function">
+        <template for:each={accounts} for:item="acc">
+            <p key={acc.id}> {acc.Name} {acc.Rating}</p>
+        </template>
+    </lightning-card>
+</template>

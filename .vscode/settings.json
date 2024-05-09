@@ -7,7 +7,30 @@
   "workbench.colorCustomizations": {},
   "salesforcedx-vscode-core.show-cli-success-msg": false,
   "cSpell.words": [
+    "cacheable",
     "callout",
-    "Callouts"
+    "Callouts",
+    "curritem",
+    "datatable",
+    "funtionality",
+    "Labelcmpvisible",
+    "Labelfromarray",
+    "lastname",
+    "listbox",
+    "Mapof",
+    "Messageonhover",
+    "mfields",
+    "NOPMD",
+    "objectname",
+    "recordid",
+    "retrievedobject",
+    "slds",
+    "sobj",
+    "sobject",
+    "soql",
+    "updatedobject"
+  ],
+  "cSpell.ignoreWords": [
+    "firstname"
   ]
 }
