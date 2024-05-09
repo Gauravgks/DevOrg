@@ -42,6 +42,8 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
     showHelpMessage = false;
     hasEditValue;
     apexReturnedData;
+    
+
 
     irr = 0;
 
@@ -163,6 +165,28 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
             });
         }
 
+         function createCopy(data) {
+                
+             const idList = [];
+             data.forEach(item => {
+                 
+                 let json = {}
+                    const obj = { ...item.obj };
+                     if ('hadEditAccess' in item && 'Id' in obj) {
+            //             // Extract the value of "Id"
+                         const idValue = obj.Id;
+                         json.hadEditAccess = item.hadEditAccess
+                         json.Id = idValue
+                         json.Record = JSON.stringify(obj)
+                         
+                         idList.push(json)
+
+                        }
+                         //console.log("Log Value ~ ObjectSearch ~ createCopy ~ this.resultCopy:", this.resultCopy)
+                 });
+                 return idList;
+             }
+
         //! Calling Apex method to return all records from the selected Obj
         sendRecordDetails({
             objectName: this.selectedRecord.selectedName,
@@ -175,34 +199,38 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
             
             //* Adding HasEditAccess field in the end of the list
             //* This field will be used to determine whether the user has edit access to the record or not
-            function createList(data) {
-                const resultList = [];
-                data.forEach(item => {
-                    const obj = { ...item.obj }; // Create a copy of the obj to prevent mutation
-                    obj.hadEditAccess = item.hadEditAccess; // Add hadEditAccess property
-                    resultList.push(obj);
-                });
-                return resultList;
-            }
+        //     function createList(data) {
+        //         const resultList = [];
+        //         data.forEach(item => {
+        //             const obj = { ...item.obj }; // Create a copy of the obj to prevent mutation
+        //             obj.hadEditAccess = item.hadEditAccess; // Add hadEditAccess property
+        //             resultList.push(obj);
+        //         });
+        //         return resultList;
+        //     }
                          
             
-            let resultList = createList(result);
-            console.log("Log Value ~ ObjectSearch ~ fetchRecords ~ resultList:", resultList)
+        //     let resultList = createList(result);
+        //     console.log("Log Value ~ ObjectSearch ~ fetchRecords ~ resultList:", resultList)
 
-            //* Converting the data in value , label pair so that it can be shown on UI.
-            const resultObj = resultList.map(obj => {
-                return Object.keys(obj).map(key => {
-                    return { value: obj[key], label: key };
-                });
-            });
-            console.log("Log Value ~ ObjectSearch ~ resultObj ~ resultObj:", resultObj)
-            const flatList = [].concat(...resultObj);
-
-
+        //     //* Converting the data in value , label pair so that it can be shown on UI.
+        //     const resultObj = resultList.map(obj => {
+        //         return Object.keys(obj).map(key => {
+        //             return { value: obj[key], label: key };
+        //         });
+        //     });
+        //     console.log("Log Value ~ ObjectSearch ~ resultObj ~ resultObj:", resultObj)
+        //   //  const flatList = [].concat(...resultObj);
 
 
-            this.apexReturnedData = resultList;
-           this.parsedData = flatList;
+        console.log("Log Value ~ ObjectSearch ~ fetchRecords ~ result:", result)
+            let value = result;
+            this.apexReturnedData = createCopy(value);
+           // console.log("Log Value ~ ObjectSearch ~ fetchRecords ~ resultCopy:", resultCopy)
+
+            //this.apexReturnedData = resultCopy;
+            console.log("Log Value ~ ObjectSearch ~ fetchRecords ~  this.apexReturnedData:",  this.apexReturnedData)
+           
 
 
             this.showDataTable = true;
@@ -220,7 +248,7 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
             this.displayError = true;
             this.objectLabelcmpvisible = false
         })
-                console.log("Log Value ~ ObjectSearch ~ fetchRecords ~ result:", result)
+               // console.log("Log Value ~ ObjectSearch ~ fetchRecords ~ result:", result)
     }
 
     closeDataView() {
