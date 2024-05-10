@@ -3,7 +3,7 @@
   <lightning-layout horizontal-align="center" class="slds-box slds-theme_default">
     <lightning-layout-item padding="around-small" size="4">
       <div class="slds-form-element">
-        <label class="slds-form-element__label" for="combobox-id-3" id="combobox-label-id-32" >
+        <label class="slds-form-element__label" for="combobox-id-3" id="combobox-label-id-32">
           <b>Recent Record Search</b>
         </label>
         <div class="slds-form-element__control">
@@ -138,148 +138,8 @@
     </lightning-card>
   </template>
 
-
-  <!-- Potential working -->
-  <!-- Component to Display the Data -->
-  <!-- <template lwc:if={showDataTable}>
-    <lightning-layout class="custom-box" multiple-rows>
-      <template for:each={parsedData} for:item="item" >
-        <lightning-layout-item key={item} class="slds-p-around_x-small">
-          <lightning-card >
-            <div  class="slds-scrollable" style="height:5rem;width:20rem" tabindex="0">
-              <div class="slds-p-left_x-small">
-              <template for:each={item} for:item="values" >
-                <lightning-layout-item key={values}>
-                 
-                  <b>{values.label}</b>
-                   
-                    <p>{values.value}</p>
-                    <lightning-formatted-url key={item} value={values.value} label={clickme} target="_blank"></lightning-formatted-url>
-                  </lightning-layout-item>
-                </template>
-              </div>
-            </div>
-          </lightning-card>
-        </lightning-layout-item>
-      </template>
-    </lightning-layout>
-  </template> -->
-
-
-  <!-- <template lwc:if={showDataTable}>
-    <div class="demo-only demo-only_viewport" style="height:640px">
-      <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="id-of-modalheader-h1"
-        class="slds-modal slds-fade-in-open slds-modal_large">
-        <div class="slds-modal__container">
-          <div class="slds-modal__header">
-            <h1 id="id-of-modalheader-h1" class="slds-text-heading_medium">Recent Records</h1>
-          </div>
-          <div class="slds-modal__content slds-grid slds-nowrap" id="modal-content-id-1">
-            <div class="slds-col slds-grid slds-grid_vertical slds-nowrap">
-              <div class="slds-p-vertical_x-small slds-p-horizontal_large slds-shrink-none slds-theme_shade">
-                <div class="slds-text-title slds-m-top_x-small" aria-live="polite">Records Fetch:{displaySize}</div>
-              </div>
-              <div class="slds-scrollable slds-grow">
-                <div class="slds-scrollable_none">
-                  <table aria-multiselectable="true"
-                    class="slds-table slds-no-row-hover slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols"
-                    role="grid" aria-label="Example product list">
-                    <thead>
-                      <tr class="slds-line-height_reset">
-                        <th class="" scope="col" style="width:3.75rem"></th>
-                        <template for:each={displayLabels} for:item="labels">
-                          <th key={labels} aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
-                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="-1">
-                              <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" >
-                                <span class="slds-truncate" title="Name">{labels}</span>
-                              </div>
-                            </a>
-                          </th>
-                        </template>
-                      </tr>
-                    </thead>
-                    <tbody>
-                       <template for:each={records} for:item="data">
-                      <tr key={data} aria-selected="false" class="slds-hint-parent">
-                        <td class="slds-text-align_right" role="gridcell" tabindex="0">
-                          <label class="slds-checkbox-button slds-checkbox-button_is-disabled"
-                            for="example-unique-id-178">
-                            <input type="checkbox" class="slds-assistive-text"
-                              value="example-unique-id-178" disabled="" tabindex="-1" />
-                              <lightning-icon icon-name="utility:edit" size="x-small"></lightning-icon>
-                          </label>
-                        </td>
-                        <template for:each={data} for:item="value">
-                        <td key={value} role="gridcell">
-                          <div class="slds-truncate">{value}</div>
-                        </td>
-                        </template>
-                      </tr>
-                     </template>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="slds-modal__footer">
-            <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
-              onclick={closeDataView}>Cancel</button>
-          </div>
-        </div>
-      </section>
-      <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
-    </div>
-  </template> -->
-
-  <!-- 
+  <!-- Showing Data using Lightning-Card -->
   <template lwc:if={showDataTable}>
-    <div class="data-container">
-        <template for:each={data} for:item="item">
-            <div key={item.obj.Id} class="data-item">
-                <h2>Data:</h2>
-                <ul>
-                    <template for:each={Object.keys(item.obj)} for:item="key">
-                        <li key={key}>{key}: {item.obj[key]}</li>
-                    </template>
-                </ul>
-            </div>
-        </template>
-    </div>
-</template> -->
-  <!-- 
-<template lwc:if={showDataTable}>
-  <div class="container">
-      <template for:each={resultMap} for:item="key">
-          <div key={key} class="item">
-              <p class="label">{key}:</p>
-            
-          </div>
-      </template>
-  </div>
-</template> -->
-
-  <!-- <template lwc:if={showDataTable}>
-    <div class="container">
-      <template for:each={parsedData} for:item="item" for:index="index">
-        <div key={item} class="item">
-          <template for:each={item} for:item="value" for:index="index">
-            <div key={value} class="item">
-              <p>{value.label}</p>
-              <template for:each={value.label} for:item="record" for:index="index">
-                <div key={record} class="item">
-                  <p>{record}</p>
-                </div>
-              </template>
-            </div>
-          </template>
-        </div>
-      </template>
-    </div>
-  </template> -->
-
-  <template lwc:if={showDataTable}>
-
     <lightning-layout class="custom-box" multiple-rows>
       <template for:each={apexReturnedData} for:item="item1">
         <lightning-layout-item key={item1} class="slds-p-around_x-small">
@@ -292,7 +152,7 @@
                 </br>
                 <p>{item1.Record}</p>
                 <lightning-button variant="success" label="Record Button" title="Open Record to Edit"
-                onclick={recordButtonClick} data-item={item1.Id} class="slds-m-left_x-small"></lightning-button>
+                  onclick={recordButtonClick} data-item={item1.Id} class="slds-m-left_x-small"></lightning-button>
               </div>
             </div>
           </lightning-card>
@@ -302,9 +162,10 @@
                 <b>Record ID: {item1.Id}</b>
                 </br>
                 <b>Edit Access: {item1.hadEditAccess}</b>
+                <p>{item1.Record}</p>
               </div>
             </div>
-            
+
           </lightning-card>
         </lightning-layout-item>
 
