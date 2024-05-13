@@ -150,26 +150,36 @@
                 </br>
                 <b>Edit Access: {item1.hadEditAccess}</b>
                 </br>
-                <p>{item1.Record}</p>
+                <template lwc:if={records}> 
+                  <template for:each={item1.Record} for:item="iterator">
+                    <b key={iterator}>{iterator.label}</b>
+                    <p key={iterator}> {iterator.value}</p>
+                  </template>
+
+                </template>
                 <lightning-button variant="success" label="Record Button" title="Open Record to Edit"
                   onclick={recordButtonClick} data-item={item1.Id} class="slds-m-left_x-small"></lightning-button>
               </div>
             </div>
-          </lightning-card>
+          </lightning-card>   
           <lightning-card lwc:else style=" --sds-c-card-color-background: #f08080">
             <div class="slds-scrollable" style="height:5rem;width:20rem" tabindex="0">
               <div class="slds-p-left_x-small">
                 <b>Record ID: {item1.Id}</b>
                 </br>
                 <b>Edit Access: {item1.hadEditAccess}</b>
-                <p>{item1.Record}</p>
+              </br>
+                <template lwc:if={records}>
+                <template for:each={item1.Record} for:item="iterator">
+                  <b key={iterator}>{iterator.label}:</b>
+                  <p key={iterator}> {iterator.value}</p>
+                </template>
+              </template>
               </div>
             </div>
 
           </lightning-card>
         </lightning-layout-item>
-
-
       </template>
     </lightning-layout>
   </template>

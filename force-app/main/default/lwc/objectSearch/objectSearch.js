@@ -18,7 +18,7 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
 
   objectLabelcmpvisible = false;
   //Removing Name field as It is not available in all Objects
-  @api defaultLabels = ["Id", "CreatedDate", "CreatedById"];
+  @api defaultLabels = [];
   selectedLabel = [];
   allSelectedLabels = [];
   queryLabels = [];
@@ -42,6 +42,11 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
 
   get isRecordSelected() {
     return this.selectedRecord.selectedName === "" ? false : true;
+  }
+
+  get records(){
+    //Todo Check for the size of Record Obj
+    return true;
   }
 
   changeHandler(event) {
@@ -91,19 +96,19 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
         console.log("Log Value ~ ObjectSearch ~ .then ~ ApexreturnedLable:", result)
         
         // Parsing the returned obj fields and spliting it to get the FieldApiname
-        const labels = [];
-        result.forEach((obj) => {
-          labels.push(obj.Field.split(".")[1]);
-        });
+        // const labels = [];
+        // result.forEach((obj) => {
+        //   labels.push(obj.Field.split(".")[1]);
+        // });
 
         //* lightning-dual-listbox requires data in value : label format. Converting the Apex labels returned list to js obj
         let convertedData = [];
         // Iterate through the field names array
-        for (let i = 0; i < labels.length; i++) {
+        for (let i = 0; i < result.length; i++) {
           // Create an object with value and label properties
           const fieldObject = {
             value: (i + 1).toString(), // Index starts from 1
-            label: labels[i]
+            label: result[i]
           };
           convertedData.push(fieldObject);
         }
@@ -192,14 +197,21 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
           const idValue = obj.Id;
           json.hadEditAccess = item.hadEditAccess;
           json.Id = idValue;
-          json.Record = JSON.stringify(obj).replace(
-            /"([^"]+)":\s*"([^"]+)"/g,
-            "$1: $2\n"
-          );
+          json.Record= convertToValueLabel(item.obj) 
           idList.push(json);
         }
       });
       return idList;
+    }
+
+    function convertToValueLabel(jsonData) {
+        const valueLabelData = [];
+        for (let key in jsonData) {
+            if (Object.prototype.hasOwnProperty.call(jsonData, key)) {
+                valueLabelData.push({ value: jsonData[key], label: key });
+            }
+        }
+        return valueLabelData;
     }
 
     //! Calling Apex method to return all records from the selected Obj

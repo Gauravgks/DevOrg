@@ -20,7 +20,7 @@ public with sharing class customLookupController {//NOPMD
   ) {
     List<SObject> sObjectList = new List<SObject>();
     String soqlQueryList = String.join(queryParameters, ', ');
-    //TODO: lazy loading/querylocator iterator => check if the query size is above 200 as userrecordaccess obj have 200 limit
+    //TODO: lazy loading/querylocator iterator => check if the query size is above 200 as UserRecordAccess obj have 200 limit
     // Query for all the records of the selected object : It will query for all the records for which User have access too
     String queryString =
       'Select ' +
@@ -62,33 +62,34 @@ public with sharing class customLookupController {//NOPMD
   }
 
   @AuraEnabled(cacheable=true)
-  public static List<FieldPermissions> getObjLabels(
+  public static List<String> getObjLabels(
     String objectName,
     String user
   ) {
-    //List<String> sObjectDetailsList = new List<String>();
-    // Get the schema describe for the object
-    //  Schema.DescribeSObjectResult objDescribe = Schema.getGlobalDescribe().get(objectName).getDescribe();
+    
+    List<String> sObjectDetailsList = new List<String>();
+    //Get the schema describe for the object
+     Schema.DescribeSObjectResult objDescribe = Schema.getGlobalDescribe().get(objectName).getDescribe();
 
-    //  // Iterate over all fields and add them to the list
-    //  for(Schema.SObjectField field : objDescribe.fields.getMap().values()) {
-    //      Schema.DescribeFieldResult fieldDescribe = field.getDescribe();
-    //      sObjectDetailsList.add((String.valueOf(fieldDescribe.getName())));
-    //  }
-
-    List<User> userProfileId = [
-      SELECT ProfileId
-      FROM User
-      WHERE Id = :user
-      WITH User_Mode
-    ];
-    String profileName = String.valueOf(userProfileId[0].ProfileId);
-    List<FieldPermissions> sObjectDetailsList = [
-      SELECT Field
-      FROM FieldPermissions
-      WHERE SobjectType = :objectName AND parent.profileid = :profileName
-      WITH User_Mode
-    ];
+     // Iterate over all fields and add them to the list
+     for(Schema.SObjectField field : objDescribe.fields.getMap().values()) {
+         Schema.DescribeFieldResult fieldDescribe = field.getDescribe();
+         sObjectDetailsList.add((String.valueOf(fieldDescribe.getName())));
+     }
+/*
+      List<User> userProfileId = [
+        SELECT ProfileId
+        FROM User
+        WHERE Id = :user
+        WITH User_Mode
+      ];
+      String profileName = String.valueOf(userProfileId[0].ProfileId);
+      List<FieldPermissions> sObjectDetailsList = [
+        SELECT Field
+        FROM FieldPermissions
+        WHERE SobjectType = :objectName AND parent.profileid = :profileName
+        WITH User_Mode
+      ];*/
 
     return sObjectDetailsList;
   }

@@ -7,6 +7,8 @@
   "workbench.colorCustomizations": {},
   "salesforcedx-vscode-core.show-cli-success-msg": false,
   "cSpell.words": [
+    "Apexreturned",
+    "Apiname",
     "cacheable",
     "callout",
     "Callouts",
@@ -16,6 +18,7 @@
     "jsondata",
     "Labelcmpvisible",
     "Labelfromarray",
+    "Lable",
     "lastname",
     "listbox",
     "Mapof",
@@ -29,6 +32,7 @@
     "sobj",
     "sobject",
     "soql",
+    "spliting",
     "updatedobject"
   ],
   "cSpell.ignoreWords": [
