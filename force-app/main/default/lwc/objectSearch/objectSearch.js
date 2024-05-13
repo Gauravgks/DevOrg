@@ -24,7 +24,7 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
   queryLabels = [];
   options = [];
   allLabel;
-  
+
   // Data Visualization
   apexReturnedData;
   showDataTable = false;
@@ -36,7 +36,7 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
   displayOptions = false;
   displayError = false;
   displayWarning = false;
-  showHelpMessage = false;  
+  showHelpMessage = false;
 
   @wire(searchRecords, { searchKey: "$searchValue" }) objectData;
 
@@ -44,10 +44,6 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
     return this.selectedRecord.selectedName === "" ? false : true;
   }
 
-  get records(){
-    //Todo Check for the size of Record Obj
-    return true;
-  }
 
   changeHandler(event) {
     window.clearTimeout(this.delayTimeout);
@@ -94,7 +90,7 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
     })
       .then((result) => {
         console.log("Log Value ~ ObjectSearch ~ .then ~ ApexreturnedLable:", result)
-        
+
         // Parsing the returned obj fields and spliting it to get the FieldApiname
         // const labels = [];
         // result.forEach((obj) => {
@@ -112,7 +108,7 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
           };
           convertedData.push(fieldObject);
         }
-        
+
         this.options = convertedData;
         this.allLabel = this.options;
         this.objectLabelcmpvisible = true;
@@ -160,7 +156,8 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
     if (
       this.selectedRecord.selectedName &&
       this.displaySize &&
-      this.objectLabelcmpvisible
+      this.objectLabelcmpvisible &&
+      this.displaySize <= 199 && this.displaySize >=1
     ) {
       this.disableButton = false;
     } else {
@@ -197,7 +194,7 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
           const idValue = obj.Id;
           json.hadEditAccess = item.hadEditAccess;
           json.Id = idValue;
-          json.Record= convertToValueLabel(item.obj) 
+          json.Record = convertToValueLabel(item.obj)
           idList.push(json);
         }
       });
@@ -205,13 +202,13 @@ export default class ObjectSearch extends NavigationMixin(LightningElement) {
     }
 
     function convertToValueLabel(jsonData) {
-        const valueLabelData = [];
-        for (let key in jsonData) {
-            if (Object.prototype.hasOwnProperty.call(jsonData, key)) {
-                valueLabelData.push({ value: jsonData[key], label: key });
-            }
+      const valueLabelData = [];
+      for (let key in jsonData) {
+        if (Object.prototype.hasOwnProperty.call(jsonData, key)) {
+          valueLabelData.push({ value: jsonData[key], label: key });
         }
-        return valueLabelData;
+      }
+      return valueLabelData;
     }
 
     //! Calling Apex method to return all records from the selected Obj

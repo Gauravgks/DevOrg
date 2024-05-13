@@ -69,17 +69,14 @@
     </lightning-layout-item>
 
     <lightning-layout-item padding="around-small" size="4">
-      <label class="slds-form-element__label" for="text-input-id-48">
-        <abbr class="slds-required" title="required">* </abbr>Input Size</label>
-      <div class="slds-form-element__control">
-        <input type="number" id="text-input-id-48" placeholder="No. of Records to Fetch" required=""
-          aria-describedby="error-message-id-49" class="slds-input" aria-invalid="true" value={displaySize}
-          oninput={inputChangeHandler} />
-      </div>
+
+      <lightning-input type="number" name="input8" label="Required number of Records" max="199"
+        message-when-range-overflow="Maximum Value allowed is 199" onchange={inputChangeHandler}></lightning-input>
+
     </lightning-layout-item>
 
     <lightning-layout-item padding="around-small" size="4">
-      </br>
+    </br>
       <button class="slds-button slds-button_success" disabled={disableButton} onclick={fetchRecords}>Submit</button>
     </lightning-layout-item>
   </lightning-layout>
@@ -132,7 +129,7 @@
   <!--Component to show label selection window-->
   <template lwc:if={objectLabelcmpvisible}>
     <lightning-card>
-      <lightning-dual-listbox name="languages" label="Select Options (at least 3 and at most 7)"
+      <lightning-dual-listbox name="labels" label="If No parameters are selected, Default Parameters will be displayed"
         source-label="Available" selected-label="Selected" field-level-help="Id is selected by Default"
         options={options} onchange={labelChange}></lightning-dual-listbox>
     </lightning-card>
@@ -141,43 +138,29 @@
   <!-- Showing Data using Lightning-Card -->
   <template lwc:if={showDataTable}>
     <lightning-layout class="custom-box" multiple-rows>
-      <template for:each={apexReturnedData} for:item="item1">
-        <lightning-layout-item key={item1} class="slds-p-around_x-small">
-          <lightning-card lwc:if={item1.hadEditAccess} style=" --sds-c-card-color-background: #82f5ce">
+      <template for:each={apexReturnedData} for:item="item">
+        <lightning-layout-item key={item} class="slds-p-around_x-small">
+          <lightning-card lwc:if={item.hadEditAccess} style=" --sds-c-card-color-background: #82f5ce">
             <div class="slds-scrollable" style="height:5rem;width:20rem" tabindex="0">
               <div class="slds-p-left_x-small">
-                <b>Record ID: {item1.Id}</b>
-                </br>
-                <b>Edit Access: {item1.hadEditAccess}</b>
-                </br>
-                <template lwc:if={records}> 
-                  <template for:each={item1.Record} for:item="iterator">
-                    <b key={iterator}>{iterator.label}</b>
-                    <p key={iterator}> {iterator.value}</p>
-                  </template>
-
-                </template>
-                <lightning-button variant="success" label="Record Button" title="Open Record to Edit"
-                  onclick={recordButtonClick} data-item={item1.Id} class="slds-m-left_x-small"></lightning-button>
-              </div>
-            </div>
-          </lightning-card>   
-          <lightning-card lwc:else style=" --sds-c-card-color-background: #f08080">
-            <div class="slds-scrollable" style="height:5rem;width:20rem" tabindex="0">
-              <div class="slds-p-left_x-small">
-                <b>Record ID: {item1.Id}</b>
-                </br>
-                <b>Edit Access: {item1.hadEditAccess}</b>
-              </br>
-                <template lwc:if={records}>
-                <template for:each={item1.Record} for:item="iterator">
+                <template for:each={item.Record} for:item="iterator">
                   <b key={iterator}>{iterator.label}:</b>
                   <p key={iterator}> {iterator.value}</p>
                 </template>
-              </template>
+                <lightning-button variant="success" label="Record Button" title="Open Record to Edit"
+                  onclick={recordButtonClick} data-item={item.Id} class="slds-m-left_x-small"></lightning-button>
               </div>
             </div>
-
+          </lightning-card>
+          <lightning-card lwc:else style=" --sds-c-card-color-background: #f08080">
+            <div class="slds-scrollable" style="height:5rem;width:20rem" tabindex="0">
+              <div class="slds-p-left_x-small">
+                <template for:each={item.Record} for:item="iterator">
+                  <b key={iterator}>{iterator.label}:</b>
+                  <p key={iterator}> {iterator.value}</p>
+                </template>
+              </div>
+            </div>
           </lightning-card>
         </lightning-layout-item>
       </template>
