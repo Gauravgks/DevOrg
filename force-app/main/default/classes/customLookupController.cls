@@ -74,22 +74,10 @@ public with sharing class customLookupController {//NOPMD
      // Iterate over all fields and add them to the list
      for(Schema.SObjectField field : objDescribe.fields.getMap().values()) {
          Schema.DescribeFieldResult fieldDescribe = field.getDescribe();
-         sObjectDetailsList.add((String.valueOf(fieldDescribe.getName())));
+         if(field.getDescribe().isAccessible()){
+           sObjectDetailsList.add((String.valueOf(fieldDescribe.getName())));
+         }
      }
-/*
-      List<User> userProfileId = [
-        SELECT ProfileId
-        FROM User
-        WHERE Id = :user
-        WITH User_Mode
-      ];
-      String profileName = String.valueOf(userProfileId[0].ProfileId);
-      List<FieldPermissions> sObjectDetailsList = [
-        SELECT Field
-        FROM FieldPermissions
-        WHERE SobjectType = :objectName AND parent.profileid = :profileName
-        WITH User_Mode
-      ];*/
 
     return sObjectDetailsList;
   }
