@@ -1,27 +1,32 @@
 <!-- apexImperativeMethod.html -->
 <template>
-    <lightning-card title="Spotify User" icon-name="utility:adduser">
-        <div class="slds-var-m-around_medium">
-            <img src={imageUrl}/>
-            <br/>
-            <p>{spotifyUser}</p>
-            <br/>
-            <p>{country}</p>
-            <br/>
-            <p>{Subscription}</p>
-            <br/>
-            <p>{Email}</p>
-        </div>
-    </lightning-card>
-    <lightning-card title="Avaliable Devices">
-        <div class="slds-var-m-around_medium">
-            <!--Code to iterate over Device list available-->  
-            <!--<template for:each={devices} for:item="device">
-                  <p key={device.id}>{device.name}</p>
-              </template>-->
-              <p>Device Name: {DevicesName}</p>
-              <br/>
-              <p>Device Type: {DevicesType}</p>
+    <div class="slds-size_small">
+        <lightning-card title="Spotify User" icon-name="utility:adduser">
+            <div class="slds-var-m-around_medium">
+                <img src={imageUrl} width="100" height="100" />
+                <p>{spotifyUser}</p>
+                <p>{country}</p>
+                <p>{Subscription}</p>
+                <p>{Email}</p>
             </div>
-    </lightning-card>
+        </lightning-card>
+    </div>
+    <!-- Available Devices -->
+    <!-- <div class="slds-size_small">
+        <lightning-card title="Avaliable Devices">
+            <div class="slds-var-p-around_medium lgc-bg">
+                <template for:each={DevicesName} for:item="devicename">
+                    <lightning-button-icon-stateful key={devicename} icon-name="standard:device" selected={likeState} onclick={handleLikeButtonClick} alternative-text="Like">{devicename}</lightning-button-icon-stateful>
+                  </template>
+                </div>
+        </lightning-card>
+    </div> -->
+
+    <div>
+        <lightning-card>
+            <lightning-button variant="brand" label="Brand" title="Get Current Playing Song" onclick={handleClick}
+                class="slds-m-left_x-small"></lightning-button>
+            <p>{currentSong}</p>
+        </lightning-card>
+    </div>
 </template>
